@@ -2,13 +2,13 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+import authRoute from './routes/authRoute.js'
+
 dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 5000
-    mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+    mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Mongo is connected successfully"))
     .catch(err => console.error(err))
 
@@ -23,4 +23,6 @@ app.use(cors({
     credentials: true
 }))
 
+app.use(cookieParser())
 app.use(express.json())
+app.use("/", authRoute)
