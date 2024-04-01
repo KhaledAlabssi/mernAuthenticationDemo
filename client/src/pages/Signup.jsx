@@ -45,7 +45,7 @@ function Signup() {
       if (success) {
         successHandler(message);
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 1000);
       } else {
         errorHandler(message);
